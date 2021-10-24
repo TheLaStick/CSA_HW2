@@ -1,42 +1,53 @@
 
 // flower.cpp - содержит функции обработки треугольника.
 
+#include <cstring>
 #include <stdio.h>
 #include "../headers/flower.h"
 
+static char *readStr(FILE *file) {
+    char local[128] = {0};
+    fscanf(file, "%s", local);
+    char *result = (char *) malloc(strlen(local));
+    strcpy(result, local);
+
+    return result;
+}
+
 // Ввод параметров треугольника из файла.
-void In(flower &f, FILE *fileIn) {
+void flower::In(FILE *fileIn) {
     int t;
-    fscanf(fileIn, "%d %d %d %d %d %d", &f.name, &f.length, &t);
+    name = readStr(fileIn);
+    fscanf(fileIn, "%d %d", &length, &t);
     // Проверка на то, что координаты находятся на одной линии.
     switch (t) {
         case 0:
-            f.type_ = flower::HOME;
+            type_ = flower::HOME;
             break;
         case 1:
-            f.type_ = flower::GARDEN;
+            type_ = flower::GARDEN;
             break;
         case 2:
-            f.type_ = flower::WILD;
+            type_ = flower::WILD;
             break;
         default:
             printf("Incorrect flower. Type cannot be"
                    " less than zero and larger than 2. "
                    "Flower will be randomly generated.\n");
-            InRandom(f);
+            InRandom();
             break;
     }
 }
 
 // Случайный ввод параметров треугольника.
-void InRandom(flower &f) {
-    f.length = rand() % 10 + 2;
-    f.name = RandomName(f.length);
-    f.type_ = static_cast<flower::type>(rand() % 3);
+void flower::InRandom() {
+    length = rand() % 10 + 1;
+    name = RandomName(length + 1);
+    type_ = static_cast<flower::type>(rand() % 3);
 }
 
-void Type(flower &f, FILE *fOut) {
-    switch (f.type_) {
+void flower::Type(FILE *fOut) {
+    switch (type_) {
         case flower::HOME:
             fprintf(fOut, " Type: HOME,");
             break;
@@ -51,23 +62,23 @@ void Type(flower &f, FILE *fOut) {
 }
 
 // Вывод параметров треугольника в файл.
-void Out(flower &f, FILE *fileOut) {
+void flower::Out(FILE *fileOut) {
     fprintf(fileOut,
             "It is Flower. Name: %s,",
-            f.name);
-    Type(f, fileOut);
-    fprintf(fileOut, " Fraction = %f;\n", Fraction(f));
+            name);
+    Type(fileOut);
+    fprintf(fileOut, " Fraction = %f;\n", Fraction());
 }
 
 // Вычисление периметра треугольника.
-double Fraction(flower &f) {
+double flower::Fraction() {
     int vowels_count = 0;
-    for (int i = 0; i < f.length - 1; i++) {
-        if (f.name[i] == 'a' || f.name[i] == 'e' || f.name[i] == 'i'
-            || f.name[i] == 'o' || f.name[i] == 'u') {
+    for (int i = 0; i < length - 1; i++) {
+        if (name[i] == 'a' || name[i] == 'e' || name[i] == 'i'
+            || name[i] == 'o' || name[i] == 'u') {
             ++vowels_count;
         }
     }
 
-    return 1.0 * vowels_count / (f.length - 1);
+    return 1.0 * vowels_count / length;
 }

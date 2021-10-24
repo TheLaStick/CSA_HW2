@@ -4,70 +4,69 @@
 #include "../headers/container.h"
 
 // Инициализация контейнера.
-void Init(container &c) {
-    c.len = 0;
+void container::Init() {
+    len = 0;
 }
 
 // Очистка контейнера от элементов (освобождение памяти).
-void Clear(container &c) {
-    for (int i = 0; i < c.len; i++) {
-        delete c.cont[i];
+void container::Clear() {
+    for (int i = 0; i < len; i++) {
+        delete cont[i];
     }
-    c.len = 0;
+    len = 0;
 }
 
 // Ввод содержимого контейнера из указанного файла.
-void In(container &c, FILE *fileIn) {
+void container::In(FILE *fileIn) {
     int key = 0;
-    while (fscanf_s(fileIn, "%d", &key) != EOF) {
-        if (c.len >= c.max_len) {
-            In(fileIn, key);
-            c.len++;
-        } else if ((c.cont[c.len] = In(fileIn, key)) != nullptr) {
-            c.len++;
+    while (fscanf(fileIn, "%d", &key) != EOF) {
+        if (len >= max_len) {
+            printf("Container is full. Further additions are prohibited");
+            break;
+        } else if ((cont[len] = cont[len]->StaticIn(fileIn, key)) != nullptr) {
+            len++;
         }
     }
 }
 
 // Случайный ввод содержимого контейнера.
-void InRandom(container &c, int size) {
-    while (c.len < size) {
-        c.cont[c.len] = InRandom();
-        if (c.cont[c.len] != nullptr) {
-            ++c.len;
+void container::InRandom(int size) {
+    while (len < size) {
+        cont[len] = cont[len]->StaticInRandom();
+        if (cont[len] != nullptr) {
+            ++len;
         }
     }
 }
 
 // Вывод содержимого контейнера в указанный файл.
-void Out(container &c, FILE *fileOut) {
-    fprintf(fileOut, "Container has %d objects.\n", c.len);
-    for (int i = 0; i < c.len; i++) {
+void container::Out(FILE *fileOut) {
+    fprintf(fileOut, "Container has %d objects.\n", len);
+    for (int i = 0; i < len; i++) {
         fprintf(fileOut, "%d: ", i);
-        Out(*(c.cont[i]), fileOut);
+        cont[i]->Out(fileOut);
     }
 }
 
 // Отчистка контейнера от фигур с периметром, меньшим среднего значаения.
-void DeleteSort(container &c) {
+void container::DeleteSort() {
     double sum_of_fractions = 0;
-    for (int i = 0; i < c.len; i++) {
-        sum_of_fractions += Fraction(*(c.cont[i]));
+    for (int i = 0; i < len; i++) {
+        sum_of_fractions += cont[i]->Fraction();
     }
 
-    sum_of_fractions /= c.len;
-    plant *new_cont;
-    new_cont = new plant[c.max_len];
+    sum_of_fractions /= len;
+    plant *new_cont[max_len];
 
     int plant_count = 0; // count of correct plants
-    for (int i = 0; i < c.len; i++) {
-        if (Fraction(*(c.cont[i])) >= sum_of_fractions) {
-            new_cont[plant_count++] = *(c.cont[i]);
+    for (int i = 0; i < len; i++) {
+        if (cont[i]->Fraction() >= sum_of_fractions) {
+            new_cont[plant_count++] = cont[i];
         }
     }
 
     for (int i = 0; i < plant_count; i++) {
-        *(c.cont[i]) = new_cont[i];
+        cont[i] = new_cont[i];
     }
-    c.len = plant_count;
+    len = plant_count;
 }

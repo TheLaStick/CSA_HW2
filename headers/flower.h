@@ -4,30 +4,34 @@
 // flower.h - содержит описание треугольника.
 
 # include "random.h"
+# include "plant.h"
 
 // Треугольник.
-class flower {
+class flower: public plant {
 public:
-    char* name; // flower name
-    int length; // name lengths
+    virtual ~flower() {}
+
+// Ввод параметров треугольника из файла.
+    virtual void In(FILE *fileIn);
+
+    void Type(FILE *fileOut);
+
+// Случайный ввод параметров треугольника.
+    virtual void InRandom();
+
+// Вывод параметров треугольника в файл.
+    virtual void Out(FILE *fileOut);
+
+// Вычисление периметра треугольника.
+    virtual double Fraction();
+private:
     enum type {
         HOME,
         GARDEN,
         WILD
     };
     type type_;
+
 };
-
-// Ввод параметров треугольника из файла.
-void In(flower &f, FILE *fileIn);
-
-// Случайный ввод параметров треугольника.
-void InRandom(flower &f);
-
-// Вывод параметров треугольника в файл.
-void Out(flower &f, FILE *fileOut);
-
-// Вычисление периметра треугольника.
-double Fraction(flower &f);
 
 #endif //CSA_HW2_FLOWER_H

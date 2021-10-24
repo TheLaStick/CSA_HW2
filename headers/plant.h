@@ -3,37 +3,33 @@
 
 // plant.h - содержит описание обобщающего растения.
 
-#include "tree.h"
-#include "bush.h"
-#include "flower.h"
+#include "random.h"
 
 // Структура, обобщающая все имеющиеся растения
 class plant {
     // Значения ключей для каждой из фигур.
-public:
-    enum key {
-        TREE, BUSH, FLOWER
-    };
-    // Ключ.
-    key k;
+protected:
+    char* name;
+    int length;
 
-    union {
-        tree t;
-        bush b;
-        flower f;
-    };
-};
+public:
+    virtual ~plant() {};
 
 // Ввод обобщенной фигуры.
-plant *In(FILE *fileIn, int key);
+    static plant* StaticIn(FILE *fileIn, int key);
+
+    virtual void In(FILE *fileIn) = 0;
 
 // Случайный ввод обобщенной фигуры.
-plant *InRandom();
+    static plant* StaticInRandom();
+
+    virtual void InRandom() = 0;
 
 // Вывод обобщенной фигуры.
-void Out(plant &p, FILE *fileOut);
+    virtual void Out(FILE *fileOut) = 0;
 
 // Вычисление периметра обобщенной фигуры.
-double Fraction(plant &p);
+    virtual double Fraction() = 0;
 
+};
 #endif //CSA_HW2_PLANT_H

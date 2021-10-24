@@ -4,12 +4,28 @@
 // bush.h - содержит описание прямоугольника.
 
 #include "random.h"
+#include "plant.h"
 
 // Прямоугольник.
-class bush {
+class bush : public plant {
 public:
-    char* name; // bush name
-    int length; // name len
+    virtual ~bush() {}
+
+// Ввод параметров прямоугольника из файла.
+    virtual void In(FILE *fileIn);
+
+// Случайный ввод параметров прямоугольника.
+    virtual void InRandom();
+
+    void Month(FILE *fileOut);
+
+// Вывод параметров прямоугольника в файл.
+    virtual void Out(FILE *fileOut);
+
+// Вычисление периметра прямоугольника.
+    virtual double Fraction();
+
+private:
     enum month {
         JANUARY = 0,
         FEBRUARY,
@@ -27,16 +43,4 @@ public:
     month month_;
 };
 
-// Ввод параметров прямоугольника из файла.
-void In(bush &b, FILE *fileIn);
-
-// Случайный ввод параметров прямоугольника.
-void InRandom(bush &b);
-
-// Вывод параметров прямоугольника в файл.
-void Out(bush &b, FILE *fileOut);
-
-// Вычисление периметра прямоугольника.
-double Fraction(bush &b);
-
-#endif //HW1_RECTANGLE_H
+#endif //CSA_HW2_BUSH_H

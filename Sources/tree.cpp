@@ -1,50 +1,58 @@
 // tree.cpp - содержит функции обработки круга.
 
 #include <stdio.h>
+#include <cstring>
 #include "../headers/tree.h"
 
+static char *readStr(FILE *file) {
+    char local[128] = {0};
+    fscanf(file, "%s", local);
+    char *result = (char *) malloc(strlen(local));
+    strcpy(result, local);
+
+    return result;
+}
+
 // Ввод параметров круга из файла.
-void In(tree &t, FILE *fileIn) {
-    fscanf_s(fileIn, "%d %d %d", &t.name, &t.length, &t.age);
+void tree::In(FILE *fileIn) {
+    age = 0;
+    name = readStr(fileIn);
+    fscanf(fileIn, "%d %d", &length, &age);
     // Проверка на то, что радиус меньше нуля.
-    if (t.age < 0 || t.length <= 0) {
+    if (age < 0 || length <= 0) {
         printf("Incorrect tree. Age and len cannot be"
                " less than zero. Tree will be randomly generated.\n");
-        InRandom(t);
+        InRandom();
     }
 }
 
 // Случайный ввод параметров круга.
-void InRandom(tree &t) {
-    t.length = rand() % 10 + 2;
-    t.name = RandomName(t.length);
+void tree::InRandom() {
+    length = rand() % 10 + 1;
+    name = RandomName(length + 1);
 
     // Генерируем положительное число - радиус круга.
     do {
-        t.age = Random(0, 100);
-    } while (t.age <= 0);
+        age = Random(0, 100);
+    } while (age <= 0);
 }
 
 // Вывод параметров круга в файл.
-void Out(tree &t, FILE *fileOut) {
-    fprintf(fileOut,
-            "It is tree. Name: %s,",
-            t.name);
-    fprintf(fileOut,
-            " Age: %d,",
-            t.age);
-    fprintf(fileOut, " Fraction = %f;\n", Fraction(t));
+void tree::Out(FILE *fileOut) {
+    fprintf(fileOut,"It is tree. Name: %s,", name);
+    fprintf(fileOut," Age: %d,", age);
+    fprintf(fileOut, " Fraction = %f;\n", Fraction());
 }
 
 // Вычисление периметра круга.
-double Fraction(tree &t) {
+double tree::Fraction() {
     int vowels_count = 0;
-    for (int i = 0; i < t.length - 1; i++) {
-        if (t.name[i] == 'a' || t.name[i] == 'e' || t.name[i] == 'i'
-            || t.name[i] == 'o' || t.name[i] == 'u') {
+    for (int i = 0; i < length - 1; i++) {
+        if (name[i] == 'a' || name[i] == 'e' || name[i] == 'i'
+            || name[i] == 'o' || name[i] == 'u') {
             ++vowels_count;
         }
     }
 
-    return 1.0 * vowels_count / (t.length - 1);
+    return 1.0 * vowels_count / length;
 }

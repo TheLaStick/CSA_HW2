@@ -5,27 +5,27 @@
 
 #include <cstdint>
 #include "random.h"
+#include "plant.h"
 
 // Tree.
-class tree {
+class tree: public plant {
 public:
-    // tree name.
-    char* name;
-    int length;
+    ~tree() {}
+
+// Ввод параметров круга из файла.
+    virtual void In(FILE *fileIn);
+
+// Случайный ввод параметров круга.
+    virtual void InRandom();
+
+// Вывод параметров круга в файл.
+    virtual void Out(FILE *fileOut);
+
+// Вычисление периметра круга.
+    virtual double Fraction();
+private:
     // tree age.
     int64_t age;
 };
-
-// Ввод параметров круга из файла.
-void In(tree &t, FILE *fileIn);
-
-// Случайный ввод параметров круга.
-void InRandom(tree &t);
-
-// Вывод параметров круга в файл.
-void Out(tree &t, FILE *fileOut);
-
-// Вычисление периметра круга.
-double Fraction(tree &t);
 
 #endif //CSA_HW2_TREE_H

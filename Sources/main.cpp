@@ -34,7 +34,7 @@ int main(int argc, char *argv[]) {
 
     printf("Start\n");
     container c;
-    Init(c);
+    c.Init();
 
     srand(static_cast<unsigned int>(time(nullptr)));
 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
             printf("Cannot find file with name %s\n", argv[2]);
             return 3;
         }
-        In(c, fileIn);
+        c.In(fileIn);
         fclose(fileIn);
         if (c.len < 1 || c.len > container::max_len) {
             printf("Incorrect number of plants = %d. Set 0 < number <= %d\n", c.len, container::max_len);
@@ -56,7 +56,7 @@ int main(int argc, char *argv[]) {
             printf("Incorrect number of plants > %d. Set 0 < number <= %d\n", size, container::max_len);
             return 3;
         }
-        InRandom(c, size);
+        c.InRandom(size);
     } else {
         errMessage2();
         return 2;
@@ -65,17 +65,17 @@ int main(int argc, char *argv[]) {
     // Поток вывода контейнера.
     FILE *fileOut1 = fopen(argv[3], "w");
     fprintf(fileOut1, "Filled container:\n");
-    Out(c, fileOut1);
+    c.Out(fileOut1);
     fclose(fileOut1);
 
     // Поток вывода контейнера с удалёнными фигурами.
     FILE *fileOut2 = fopen(argv[4], "w");
-    DeleteSort(c);
+    c.DeleteSort();
     fprintf(fileOut2, "Sorted container with deleted elements:\n");
-    Out(c, fileOut2);
+    c.Out(fileOut2);
     fclose(fileOut2);
 
-    Clear(c);
+    c.Clear();
 
     printf("Stop\n");
     //printf("Time taken: %.2f ms\n", (double)(clock() - start) / CLOCKS_PER_SEC * 1000);
