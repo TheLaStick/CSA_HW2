@@ -1,0 +1,7 @@
+Filled container:
+Container has 5 objects.
+0: It is Flower. Name: lily, Type: GARDEN, Fraction = 0.250000;
+1: It is Flower. Name: rose, Type: WILD, Fraction = 0.250000;
+2: It is Flower. Name: snowdrop, Type: HOME, Fraction = 0.250000;
+3: It is Flower. Name: tulip, Type: WILD, Fraction = 0.400000;
+4: It is Flower. Name: chrysanthemum, Type: HOME, Fraction = 0.230769;

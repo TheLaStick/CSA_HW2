@@ -1,0 +1,11 @@
+Filled container:
+Container has 9 objects.
+0: It is tree. Name: one, Age: 54, Fraction = 0.333333;
+1: It is Bush. Name: two, Month: MARCH  Fraction = 0.000000;
+2: It is Flower. Name: three, Type: GARDEN, Fraction = 0.200000;
+3: It is tree. Name: four, Age: 1000, Fraction = 0.500000;
+4: It is Bush. Name: five, Month: MARCH  Fraction = 0.250000;
+5: It is Flower. Name: six, Type: GARDEN, Fraction = 0.333333;
+6: It is tree. Name: seven, Age: 21321, Fraction = 0.400000;
+7: It is Bush. Name: eight, Month: JANUARY  Fraction = 0.400000;
+8: It is Flower. Name: nine, Type: HOME, Fraction = 0.250000;

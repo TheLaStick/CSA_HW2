@@ -1,0 +1,7 @@
+Sorted container with deleted elements:
+Container has 5 objects.
+0: It is tree. Name: one, Age: 54, Fraction = 0.333333;
+1: It is tree. Name: four, Age: 1000, Fraction = 0.500000;
+2: It is Flower. Name: six, Type: GARDEN, Fraction = 0.333333;
+3: It is tree. Name: seven, Age: 21321, Fraction = 0.400000;
+4: It is Bush. Name: eight, Month: JANUARY  Fraction = 0.400000;
