@@ -1,28 +1,30 @@
 #ifndef CSA_HW2_FLOWER_H
 #define CSA_HW2_FLOWER_H
 
-// flower.h - содержит описание треугольника.
+//------------------------------------------------------------------------------
+// flower.h - contains flower description and its interface
+//------------------------------------------------------------------------------
 
 # include "random.h"
 # include "plant.h"
 
-// Треугольник.
+// flower
 class flower: public plant {
 public:
     virtual ~flower() {}
 
-// Ввод параметров треугольника из файла.
+    // Flower parameters input from file
     virtual void In(FILE *fileIn);
 
     void Type(FILE *fileOut);
 
-// Случайный ввод параметров треугольника.
+    // Random flower parameters input
     virtual void InRandom();
 
-// Вывод параметров треугольника в файл.
+    // Flower parameters output in formative stream
     virtual void Out(FILE *fileOut);
 
-// Вычисление периметра треугольника.
+    // Computing flower fraction
     virtual double Fraction();
 private:
     enum type {
@@ -31,7 +33,6 @@ private:
         WILD
     };
     type type_;
-
 };
 
 #endif //CSA_HW2_FLOWER_H

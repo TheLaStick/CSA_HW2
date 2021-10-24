@@ -1,38 +1,40 @@
 #ifndef CSA_HW2_CONTAINER_H
 #define CSA_HW2_CONTAINER_H
 
-// container.h - содержит тип данных, представляющий простейший контейнер.
+//------------------------------------------------------------------------------
+// container.h - contains data type
+// featuring simplest container
+//------------------------------------------------------------------------------
 
 #include <stdio.h>
 #include "plant.h"
 
-// Простейший контейнер на основе одномерного массива
+//------------------------------------------------------------------------------
+// Simple container based on one-dimensional array
 class container {
 public:
     enum {
-        // Максимальная длина.
         max_len = 10000
     };
-    // Текущая длина.`
     int len;
     plant *cont[max_len];
 
-// Инициализация контейнера.
+// Container initialization
     void Init();
 
-// Очистка контейнера от элементов (освобождение памяти).
+// Clearing container from elements (clearing memory)
     void Clear();
 
-// Ввод содержимого контейнера из указанного файла.
+// Inputting container content from stream
     void In(FILE *fileIn);
 
-// Случайный ввод содержимого контейнера.
+// Random input of container content
     void InRandom(int size);
 
-// Вывод содержимого контейнера в указанный файл.
+// Outputting container content from stream
     void Out(FILE *fileOut);
 
-// Отчистка контейнера от фигур с периметром, меньшим среднего значаения.
+// Deleting some elements and container sort
     void DeleteSort();
 };
 

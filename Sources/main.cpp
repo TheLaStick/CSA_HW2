@@ -1,5 +1,7 @@
-
-// main.cpp - содержит главную функцию, обеспечивающую простое тестирование.
+//------------------------------------------------------------------------------
+// main.cpp - contains main function
+// for simple test
+//------------------------------------------------------------------------------
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -62,13 +64,13 @@ int main(int argc, char *argv[]) {
         return 2;
     }
 
-    // Поток вывода контейнера.
+    // Outputting container content into a file
     FILE *fileOut1 = fopen(argv[3], "w");
     fprintf(fileOut1, "Filled container:\n");
     c.Out(fileOut1);
     fclose(fileOut1);
 
-    // Поток вывода контейнера с удалёнными фигурами.
+    // The 2nd part of task
     FILE *fileOut2 = fopen(argv[4], "w");
     c.DeleteSort();
     fprintf(fileOut2, "Sorted container with deleted elements:\n");

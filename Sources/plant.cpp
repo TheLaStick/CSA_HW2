@@ -1,6 +1,7 @@
-// plant.cpp - содержит процедуры
-// связанные с обработкой обобщенного растения
-// и создания произвольного растения.
+//------------------------------------------------------------------------------
+// shape.cpp - contains procedures related to work with general plant
+// and creating random plant
+//------------------------------------------------------------------------------
 
 #include <stdio.h>
 #include "../headers/plant.h"
@@ -8,7 +9,8 @@
 #include "../headers/bush.h"
 #include "../headers/flower.h"
 
-// Ввод параметров обобщенной фигуры из файла.
+//------------------------------------------------------------------------------
+// General plant parameters input from file
 plant* plant::StaticIn(FILE *fileIn, int key) {
     plant *p;
 
@@ -31,7 +33,7 @@ plant* plant::StaticIn(FILE *fileIn, int key) {
     return p;
 }
 
-// Случайный ввод обобщенной фигуры.
+// Random general plant input
 plant* plant::StaticInRandom() {
     plant *p;
     // Генерируем число, которыму соответствует одна из фигур.

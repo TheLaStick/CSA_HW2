@@ -1,5 +1,8 @@
+//------------------------------------------------------------------------------
+// bush.cpp - contains parameters input proccess
+// for already made bush
+//------------------------------------------------------------------------------
 
-// bush.cpp - содержит процедуру ввода параметров для уже созданного прямоугольника.
 #include <cstring>
 #include <stdio.h>
 #include "../headers/bush.h"
@@ -13,7 +16,8 @@ static char *readStr(FILE *file) {
     return result;
 }
 
-// Ввод параметров прямоугольника из файла.
+//------------------------------------------------------------------------------
+// Bush parameters input from file
 void bush::In(FILE *fileIn) {
     int m = 0;
     name = readStr(fileIn);
@@ -65,7 +69,7 @@ void bush::In(FILE *fileIn) {
     }
 }
 
-// Случайный ввод параметров прямоугольника.
+// Random bush parameters input
 void bush::InRandom() {
     length = rand() % 10 + 1;
     name = RandomName(length + 1);
@@ -113,7 +117,8 @@ void bush::Month(FILE *fOut) {
     }
 }
 
-// Вывод параметров прямоугольника в файл.
+//------------------------------------------------------------------------------
+// Bush parameters output in formative stream
 void bush::Out(FILE *fileOut) {
     fprintf(fileOut,
             "It is Bush. Name: %s,",
@@ -122,7 +127,8 @@ void bush::Out(FILE *fileOut) {
     fprintf(fileOut, " Fraction = %f;\n", Fraction());
 }
 
-// Вычисление периметра прямоугольника.
+//------------------------------------------------------------------------------
+// Computing bush fraction
 double bush::Fraction() {
     int vowels_count = 0;
     for (int i = 0; i < length - 1; i++) {

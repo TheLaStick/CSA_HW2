@@ -1,7 +1,9 @@
 #ifndef CSA_HW2_TREE_H
 #define CSA_HW2_TREE_H
 
-// tree.h - содержит описание дерева.
+//------------------------------------------------------------------------------
+// tree.h - contains tree description and its interface
+//------------------------------------------------------------------------------
 
 #include <cstdint>
 #include "random.h"
@@ -12,16 +14,16 @@ class tree: public plant {
 public:
     ~tree() {}
 
-// Ввод параметров круга из файла.
+    // Tree parameters input from file
     virtual void In(FILE *fileIn);
 
-// Случайный ввод параметров круга.
+    // Random tree parameters input
     virtual void InRandom();
 
-// Вывод параметров круга в файл.
+    // Tree parameters output in formative stream
     virtual void Out(FILE *fileOut);
 
-// Вычисление периметра круга.
+    // Computing tree fraction
     virtual double Fraction();
 private:
     // tree age.

@@ -1,14 +1,17 @@
-
-// container.cpp - содержит функции обработки контейнера.
+//------------------------------------------------------------------------------
+// container_Constr.cpp - contains functions of proccessing container
+//------------------------------------------------------------------------------
 
 #include "../headers/container.h"
 
-// Инициализация контейнера.
+//------------------------------------------------------------------------------
+// Container initialization
 void container::Init() {
     len = 0;
 }
 
-// Очистка контейнера от элементов (освобождение памяти).
+//------------------------------------------------------------------------------
+// Clearing container from elements (clearing memory)
 void container::Clear() {
     for (int i = 0; i < len; i++) {
         delete cont[i];
@@ -16,7 +19,8 @@ void container::Clear() {
     len = 0;
 }
 
-// Ввод содержимого контейнера из указанного файла.
+//------------------------------------------------------------------------------
+// Inputting container content from stream
 void container::In(FILE *fileIn) {
     int key = 0;
     while (fscanf(fileIn, "%d", &key) != EOF) {
@@ -29,7 +33,8 @@ void container::In(FILE *fileIn) {
     }
 }
 
-// Случайный ввод содержимого контейнера.
+//------------------------------------------------------------------------------
+// Random input of container content
 void container::InRandom(int size) {
     while (len < size) {
         cont[len] = cont[len]->StaticInRandom();
@@ -39,7 +44,8 @@ void container::InRandom(int size) {
     }
 }
 
-// Вывод содержимого контейнера в указанный файл.
+//------------------------------------------------------------------------------
+// Outputting container content from stream
 void container::Out(FILE *fileOut) {
     fprintf(fileOut, "Container has %d objects.\n", len);
     for (int i = 0; i < len; i++) {
@@ -48,7 +54,8 @@ void container::Out(FILE *fileOut) {
     }
 }
 
-// Отчистка контейнера от фигур с периметром, меньшим среднего значаения.
+//------------------------------------------------------------------------------
+// Deleting some elements and container sort
 void container::DeleteSort() {
     double sum_of_fractions = 0;
     for (int i = 0; i < len; i++) {

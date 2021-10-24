@@ -1,4 +1,7 @@
-// tree.cpp - содержит функции обработки круга.
+//------------------------------------------------------------------------------
+// tree.cpp - contains parameters input proccess
+// for already made tree
+//------------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <cstring>
@@ -13,7 +16,8 @@ static char *readStr(FILE *file) {
     return result;
 }
 
-// Ввод параметров круга из файла.
+//------------------------------------------------------------------------------
+// Tree parameters input from file
 void tree::In(FILE *fileIn) {
     age = 0;
     name = readStr(fileIn);
@@ -26,25 +30,26 @@ void tree::In(FILE *fileIn) {
     }
 }
 
-// Случайный ввод параметров круга.
+// Random tree parameters input
 void tree::InRandom() {
     length = rand() % 10 + 1;
     name = RandomName(length + 1);
 
-    // Генерируем положительное число - радиус круга.
     do {
         age = Random(0, 100);
     } while (age <= 0);
 }
 
-// Вывод параметров круга в файл.
+//------------------------------------------------------------------------------
+// Tree parameters output in formative stream
 void tree::Out(FILE *fileOut) {
     fprintf(fileOut,"It is tree. Name: %s,", name);
     fprintf(fileOut," Age: %d,", age);
     fprintf(fileOut, " Fraction = %f;\n", Fraction());
 }
 
-// Вычисление периметра круга.
+//------------------------------------------------------------------------------
+// Computing tree fraction
 double tree::Fraction() {
     int vowels_count = 0;
     for (int i = 0; i < length - 1; i++) {

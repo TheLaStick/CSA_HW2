@@ -1,5 +1,7 @@
-
-// flower.cpp - содержит функции обработки треугольника.
+//------------------------------------------------------------------------------
+// flower.cpp - contains parameters input proccess
+// for already made flower
+//------------------------------------------------------------------------------
 
 #include <cstring>
 #include <stdio.h>
@@ -14,12 +16,12 @@ static char *readStr(FILE *file) {
     return result;
 }
 
-// Ввод параметров треугольника из файла.
+// Flower parameters input from file
 void flower::In(FILE *fileIn) {
     int t;
     name = readStr(fileIn);
     fscanf(fileIn, "%d %d", &length, &t);
-    // Проверка на то, что координаты находятся на одной линии.
+
     switch (t) {
         case 0:
             type_ = flower::HOME;
@@ -39,7 +41,7 @@ void flower::In(FILE *fileIn) {
     }
 }
 
-// Случайный ввод параметров треугольника.
+// Random flower parameters input
 void flower::InRandom() {
     length = rand() % 10 + 1;
     name = RandomName(length + 1);
@@ -61,7 +63,8 @@ void flower::Type(FILE *fOut) {
     }
 }
 
-// Вывод параметров треугольника в файл.
+//------------------------------------------------------------------------------
+// Flower parameters output in formative stream
 void flower::Out(FILE *fileOut) {
     fprintf(fileOut,
             "It is Flower. Name: %s,",
@@ -70,7 +73,8 @@ void flower::Out(FILE *fileOut) {
     fprintf(fileOut, " Fraction = %f;\n", Fraction());
 }
 
-// Вычисление периметра треугольника.
+//------------------------------------------------------------------------------
+// Computing flower fraction
 double flower::Fraction() {
     int vowels_count = 0;
     for (int i = 0; i < length - 1; i++) {

@@ -1,13 +1,14 @@
 #ifndef CSA_HW2_PLANT_H
 #define CSA_HW2_PLANT_H
-
-// plant.h - содержит описание обобщающего растения.
+//------------------------------------------------------------------------------
+// plant.h - contains general plant description
+//------------------------------------------------------------------------------
 
 #include "random.h"
 
-// Структура, обобщающая все имеющиеся растения
+//------------------------------------------------------------------------------
+// structure, generalizing all available plants
 class plant {
-    // Значения ключей для каждой из фигур.
 protected:
     char* name;
     int length;
@@ -15,20 +16,20 @@ protected:
 public:
     virtual ~plant() {};
 
-// Ввод обобщенной фигуры.
+    // General plant parameters input from file
     static plant* StaticIn(FILE *fileIn, int key);
 
     virtual void In(FILE *fileIn) = 0;
 
-// Случайный ввод обобщенной фигуры.
+    // Random general plant input
     static plant* StaticInRandom();
 
     virtual void InRandom() = 0;
 
-// Вывод обобщенной фигуры.
+    // General tree parameters output into a stream
     virtual void Out(FILE *fileOut) = 0;
 
-// Вычисление периметра обобщенной фигуры.
+    // Computing division number of vowels with general name length
     virtual double Fraction() = 0;
 
 };
