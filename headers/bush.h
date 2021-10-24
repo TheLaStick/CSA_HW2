@@ -1,28 +1,42 @@
-#ifndef HW1_RECTANGLE_H
-#define HW1_RECTANGLE_H
+#ifndef CSA_HW2_BUSH_H
+#define CSA_HW2_BUSH_H
 
 // bush.h - содержит описание прямоугольника.
 
 #include "random.h"
 
 // Прямоугольник.
-struct bush {
-    // Координаты левой верхней вершины.
-    int x1, y1;
-    // Координаты правой нижней вершины.
-    int x2, y2;
+class bush {
+public:
+    char* name; // bush name
+    int length; // name len
+    enum month {
+        JANUARY = 0,
+        FEBRUARY,
+        MARCH,
+        APRIL,
+        MAY,
+        JUNE,
+        JULY,
+        AUGUST,
+        SEPTEMBER,
+        OCTOBER,
+        NOVEMBER,
+        DECEMBER
+    };
+    month month_;
 };
 
 // Ввод параметров прямоугольника из файла.
-void In(bush &r, FILE *fileIn);
+void In(bush &b, FILE *fileIn);
 
 // Случайный ввод параметров прямоугольника.
-void InRandom(bush &r);
+void InRandom(bush &b);
 
 // Вывод параметров прямоугольника в файл.
-void Out(bush &r, FILE *fileOut);
+void Out(bush &b, FILE *fileOut);
 
 // Вычисление периметра прямоугольника.
-double Perimeter(bush &r);
+double Fraction(bush &b);
 
 #endif //HW1_RECTANGLE_H

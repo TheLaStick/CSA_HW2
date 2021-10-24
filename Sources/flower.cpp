@@ -2,45 +2,72 @@
 // flower.cpp - содержит функции обработки треугольника.
 
 #include <stdio.h>
-#include <math.h>
-#include "../Headers/flower.h"
+#include "../headers/flower.h"
 
 // Ввод параметров треугольника из файла.
-void In(flower &t, FILE *fileIn) {
-    fscanf(fileIn, "%d %d %d %d %d %d", &t.x1, &t.y1, &t.x2, &t.y2, &t.x3, &t.y3);
+void In(flower &f, FILE *fileIn) {
+    int t;
+    fscanf(fileIn, "%d %d %d %d %d %d", &f.name, &f.length, &t);
     // Проверка на то, что координаты находятся на одной линии.
-    if ((t.x3 - t.x2) * (t.y2 - t.y1) == (t.y3 - t.y2) * (t.x2 - t.x1)) {
-        printf("Incorrect TRIANGLE. All coordinates are on one line. The TRIANGLE will be randomly generated.\n");
-        InRandom(t);
+    switch (t) {
+        case 0:
+            f.type_ = flower::HOME;
+            break;
+        case 1:
+            f.type_ = flower::GARDEN;
+            break;
+        case 2:
+            f.type_ = flower::WILD;
+            break;
+        default:
+            printf("Incorrect flower. Type cannot be"
+                   " less than zero and larger than 2. "
+                   "Flower will be randomly generated.\n");
+            InRandom(f);
+            break;
     }
 }
 
 // Случайный ввод параметров треугольника.
-void InRandom(flower &t) {
-    t.x1 = Random(-100, 100);
-    t.y1 = Random(-100, 100);
-    t.x2 = Random(-100, 100);
-    t.x3 = Random(-100, 100);
-    // Генерируем y2 так, чтобы точки (x1, y1) и (x2, y2) не совпадали.
-    do {
-        t.y2 = Random(-100, 100);
-    } while (t.x1 == t.x2 && t.y1 == t.y2);
-    // Генерируем y3 так, чтобы точки (x1, y1), (x2, y2) и (x3, y3) не лежали на одной прямой.
-    do {
-        t.y3 = Random(-100, 100);
-    } while ((t.x3 - t.x2) * (t.y2 - t.y1) == (t.y3 - t.y2) * (t.x2 - t.x1));
+void InRandom(flower &f) {
+    f.length = rand() % 10 + 2;
+    f.name = RandomName(f.length);
+    f.type_ = static_cast<flower::type>(rand() % 3);
+}
+
+void Type(flower &f, FILE *fOut) {
+    switch (f.type_) {
+        case flower::HOME:
+            fprintf(fOut, " Type: HOME,");
+            break;
+        case flower::GARDEN:
+            fprintf(fOut, " Type: GARDEN,");
+            break;
+        case flower::WILD:
+            fprintf(fOut, " Type: WILD,");
+            break;
+
+    }
 }
 
 // Вывод параметров треугольника в файл.
-void Out(flower &t, FILE *fileOut) {
+void Out(flower &f, FILE *fileOut) {
     fprintf(fileOut,
-            "It is TRIANGLE. Coordinates of vertices: (%d, %d), (%d, %d), (%d, %d). Fraction =  %f;",
-            t.x1, t.y1, t.x2, t.y2, t.x3, t.y3, Perimeter(t));
+            "It is Flower. Name: %s,",
+            f.name);
+    Type(f, fileOut);
+    fprintf(fileOut, " Fraction = %f;\n", Fraction(f));
 }
 
 // Вычисление периметра треугольника.
-double Perimeter(flower &t) {
-    return sqrt(pow(t.x1 - t.x2, 2) + pow(t.y1 - t.y2, 2)) +
-           sqrt(pow(t.x2 - t.x3, 2) + pow(t.y2 - t.y3, 2)) +
-           sqrt(pow(t.x1 - t.x3, 2) + pow(t.y1 - t.y3, 2));
+double Fraction(flower &f) {
+    int vowels_count = 0;
+    for (int i = 0; i < f.length - 1; i++) {
+        if (f.name[i] == 'a' || f.name[i] == 'e' || f.name[i] == 'i'
+            || f.name[i] == 'o' || f.name[i] == 'u') {
+            ++vowels_count;
+        }
+    }
+
+    return 1.0 * vowels_count / (f.length - 1);
 }

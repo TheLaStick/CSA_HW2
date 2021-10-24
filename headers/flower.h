@@ -1,28 +1,33 @@
-#ifndef HW1_TRIANGLE_H
-#define HW1_TRIANGLE_H
+#ifndef CSA_HW2_FLOWER_H
+#define CSA_HW2_FLOWER_H
 
 // flower.h - содержит описание треугольника.
 
 # include "random.h"
 
 // Треугольник.
-struct flower {
-    // Координаты вершин.
-    int x1, y1;
-    int x2, y2;
-    int x3, y3;
+class flower {
+public:
+    char* name; // flower name
+    int length; // name lengths
+    enum type {
+        HOME,
+        GARDEN,
+        WILD
+    };
+    type type_;
 };
 
 // Ввод параметров треугольника из файла.
-void In(flower &t, FILE *fileIn);
+void In(flower &f, FILE *fileIn);
 
 // Случайный ввод параметров треугольника.
-void InRandom(flower &t);
+void InRandom(flower &f);
 
 // Вывод параметров треугольника в файл.
-void Out(flower &t, FILE *fileOut);
+void Out(flower &f, FILE *fileOut);
 
 // Вычисление периметра треугольника.
-double Perimeter(flower &t);
+double Fraction(flower &f);
 
-#endif //HW1_TRIANGLE_H
+#endif //CSA_HW2_FLOWER_H

@@ -33,25 +33,25 @@ plant *In(FILE *fileIn, int key) {
 
 // Случайный ввод обобщенной фигуры.
 plant *InRandom() {
-    plant *s;
+    plant *p;
     // Генерируем число, которыму соответствует одна из фигур.
     auto key = rand() % 3 + 1;
     switch (key) {
         case 1:
-            s = new plant;
-            s->k = plant::TREE;
-            InRandom(s->t);
-            return s;
+            p = new plant;
+            p->k = plant::TREE;
+            InRandom(p->t);
+            return p;
         case 2:
-            s = new plant;
-            s->k = plant::BUSH;
-            InRandom(s->b);
-            return s;
+            p = new plant;
+            p->k = plant::BUSH;
+            InRandom(p->b);
+            return p;
         case 3:
-            s = new plant;
-            s->k = plant::FLOWER;
-            InRandom(s->f);
-            return s;
+            p = new plant;
+            p->k = plant::FLOWER;
+            InRandom(p->f);
+            return p;
         default:
             return nullptr;
     }
@@ -73,18 +73,17 @@ void Out(plant &s, FILE *fileOut) {
             fprintf(fileOut, "Incorrect plant!\n");
             return;
     }
-    Color(s, fileOut);
 }
 
 // Вычисление периметра фигуры.
 double Fraction(plant &p) {
     switch (p.k) {
         case plant::TREE:
-            return Perimeter(p.t);
+            return Fraction(p.t);
         case plant::BUSH:
-            return Perimeter(p.b);
+            return Fraction(p.b);
         case plant::FLOWER:
-            return Perimeter(p.f);
+            return Fraction(p.f);
         default:
             return 0.0;
     }

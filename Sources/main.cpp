@@ -6,7 +6,7 @@
 #include <time.h>
 #include <string.h>
 
-#include "../Headers/container.h"
+#include "../headers/container.h"
 
 void errMessage1() {
     printf("Incorrect command line!\n"
@@ -46,14 +46,14 @@ int main(int argc, char *argv[]) {
         }
         In(c, fileIn);
         fclose(fileIn);
-        if (c.length < 1 || c.length > container::max_length) {
-            printf("Incorrect number of figures = %d. Set 0 < number <= %d\n", c.length, container::max_length);
+        if (c.len < 1 || c.len > container::max_len) {
+            printf("Incorrect number of plants = %d. Set 0 < number <= %d\n", c.len, container::max_len);
             return 3;
         }
     } else if (!strcmp(argv[1], "-n")) {
         int size = atoi(argv[2]);
-        if ((size < 1) || (size > container::max_length)) {
-            printf("Incorrect number of figures > %d. Set 0 < number <= %d\n", size, container::max_length);
+        if ((size < 1) || (size > container::max_len)) {
+            printf("Incorrect number of plants > %d. Set 0 < number <= %d\n", size, container::max_len);
             return 3;
         }
         InRandom(c, size);
@@ -70,8 +70,8 @@ int main(int argc, char *argv[]) {
 
     // Поток вывода контейнера с удалёнными фигурами.
     FILE *fileOut2 = fopen(argv[4], "w");
-    DeleteElements(c);
-    fprintf(fileOut2, "Container with deleted elements:\n");
+    DeleteSort(c);
+    fprintf(fileOut2, "Sorted container with deleted elements:\n");
     Out(c, fileOut2);
     fclose(fileOut2);
 

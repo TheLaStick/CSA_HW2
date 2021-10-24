@@ -26,6 +26,6 @@ void InRandom(tree &t);
 void Out(tree &t, FILE *fileOut);
 
 // Вычисление периметра круга.
-double Perimeter(tree &t);
+double Fraction(tree &t);
 
 #endif //CSA_HW2_TREE_H

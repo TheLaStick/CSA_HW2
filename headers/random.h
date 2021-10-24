@@ -9,7 +9,7 @@
 inline auto Random(int min, int max) {
     return rand() % (max - min) + min;
 }
-inline auto RandomName(int count) {
+inline char* RandomName(int count) {
     char* name = new char[count];
     for (int i = 0; i < count - 1; i++) {
         name[i] = static_cast<char>(rand() % 25) + 'a';

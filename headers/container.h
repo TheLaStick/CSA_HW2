@@ -1,5 +1,5 @@
-#ifndef HW1_CONTAINER_H
-#define HW1_CONTAINER_H
+#ifndef CSA_HW2_CONTAINER_H
+#define CSA_HW2_CONTAINER_H
 
 // container.h - содержит тип данных, представляющий простейший контейнер.
 
@@ -7,14 +7,15 @@
 #include "plant.h"
 
 // Простейший контейнер на основе одномерного массива
-struct container {
+class container {
+public:
     enum {
         // Максимальная длина.
-        max_length = 10000
+        max_len = 10000
     };
-    // Текущая длина.
-    int length;
-    plant *cont[max_length];
+    // Текущая длина.`
+    int len;
+    plant *cont[max_len];
 };
 
 // Инициализация контейнера.
@@ -33,6 +34,6 @@ void InRandom(container &c, int size);
 void Out(container &c, FILE *fileOut);
 
 // Отчистка контейнера от фигур с периметром, меньшим среднего значаения.
-void DeleteElements(container &c);
+void DeleteSort(container &c);
 
-#endif //HW1_CONTAINER_H
+#endif //CSA_HW2_CONTAINER_H

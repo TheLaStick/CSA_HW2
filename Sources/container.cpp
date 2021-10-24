@@ -1,73 +1,73 @@
 
 // container.cpp - содержит функции обработки контейнера.
 
-#include "../Headers/container.h"
+#include "../headers/container.h"
 
 // Инициализация контейнера.
 void Init(container &c) {
-    c.length = 0;
+    c.len = 0;
 }
 
 // Очистка контейнера от элементов (освобождение памяти).
 void Clear(container &c) {
-    for (int i = 0; i < c.length; i++) {
+    for (int i = 0; i < c.len; i++) {
         delete c.cont[i];
     }
-    c.length = 0;
+    c.len = 0;
 }
 
 // Ввод содержимого контейнера из указанного файла.
 void In(container &c, FILE *fileIn) {
     int key = 0;
     while (fscanf_s(fileIn, "%d", &key) != EOF) {
-        if (c.length >= c.max_length) {
+        if (c.len >= c.max_len) {
             In(fileIn, key);
-            c.length++;
-        } else if ((c.cont[c.length] = In(fileIn, key)) != nullptr) {
-            c.length++;
+            c.len++;
+        } else if ((c.cont[c.len] = In(fileIn, key)) != nullptr) {
+            c.len++;
         }
     }
 }
 
 // Случайный ввод содержимого контейнера.
 void InRandom(container &c, int size) {
-    while (c.length < size) {
-        if ((c.cont[c.length] = InRandom()) != nullptr) {
-            ++c.length;
+    while (c.len < size) {
+        c.cont[c.len] = InRandom();
+        if (c.cont[c.len] != nullptr) {
+            ++c.len;
         }
     }
 }
 
 // Вывод содержимого контейнера в указанный файл.
 void Out(container &c, FILE *fileOut) {
-    fprintf(fileOut, "Container contains %d elements.\n", c.length);
-    for (int i = 0; i < c.length; i++) {
+    fprintf(fileOut, "Container has %d objects.\n", c.len);
+    for (int i = 0; i < c.len; i++) {
         fprintf(fileOut, "%d: ", i);
         Out(*(c.cont[i]), fileOut);
     }
 }
 
 // Отчистка контейнера от фигур с периметром, меньшим среднего значаения.
-void DeleteElements(container &c) {
-    container newContainer;
-    double perimeters[c.max_length];
-    double averagePerimeter = 0.0;
-    // Считаем сумму периметров всех фигур.
-    for (int i = 0; i < c.length; ++i) {
-        perimeters[i] = Fraction(*c.cont[i]);
-        averagePerimeter += perimeters[i];
+void DeleteSort(container &c) {
+    double sum_of_fractions = 0;
+    for (int i = 0; i < c.len; i++) {
+        sum_of_fractions += Fraction(*(c.cont[i]));
     }
-    // Находим среднее значение периметров.
-    averagePerimeter /= c.length;
-    int index = 0;
-    // Кладём в массив только те фигуры, у которых периметр больше среднего.
-    for (int i = 0; i < c.length; i++) {
-        if (perimeters[i] >= averagePerimeter) {
-            newContainer.cont[index] = c.cont[i];
-            ++index;
+
+    sum_of_fractions /= c.len;
+    plant *new_cont;
+    new_cont = new plant[c.max_len];
+
+    int plant_count = 0; // count of correct plants
+    for (int i = 0; i < c.len; i++) {
+        if (Fraction(*(c.cont[i])) >= sum_of_fractions) {
+            new_cont[plant_count++] = *(c.cont[i]);
         }
     }
-    c = newContainer;
-    c.length = index;
-    Clear(newContainer);
+
+    for (int i = 0; i < plant_count; i++) {
+        *(c.cont[i]) = new_cont[i];
+    }
+    c.len = plant_count;
 }
