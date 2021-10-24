@@ -25,7 +25,7 @@ void errMessage2() {
 }
 
 int main(int argc, char *argv[]) {
-    //clock_t start = clock();
+    clock_t start = clock();
 
     if (argc != 5) {
         errMessage1();
@@ -78,6 +78,6 @@ int main(int argc, char *argv[]) {
     c.Clear();
 
     printf("Stop\n");
-    //printf("Time taken: %.2f ms\n", (double)(clock() - start) / CLOCKS_PER_SEC * 1000);
+    printf("Time taken: %.2f ms\n", (double)(clock() - start) / CLOCKS_PER_SEC * 1000);
     return 0;
 }
